@@ -12,7 +12,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;      / /_/ / __/ / /   / /   / / / // / | | / / __/ / /_/ /\__ \ 
 ;     / __  / /___/ /___/ /___/ /_/ // /  | |/ / /___/ _, _/___/ / 
 ;    /_/ /_/_____/_____/_____/_____/___/  |___/_____/_/ |_|/____/
-;      AutoHotKey Script - By Spirits & Crushfield -  v0.9.1 
+;      AutoHotKey Script - By Spirits & Crushfield -  v0.10.0 
 
 
 ; All-in-One HellDiversScript
@@ -22,1020 +22,110 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ;^ means Ctrl, + is Shift, ! is Alt
 
-; TO 'ENABLE' a strategem define 'x' and remove the ';' in front of it
-; Be warned! I'm not sure what duplicates will do!
-; This is where the controls of your scripts are located
+; List of names of programmed strategem sequences
+;AMGIIMinigunTurret      ARX34RailcannonTurret         AC22DumDum               AD289Angel
+;AD334GuardDog           AT47AntiTankEmplacement       AirdroppedAntiTankMines  AirdroppedStunMines
+;AntiPersonnelBarrier    CloseAirSupport               DistractorBeacon         EAT17
+;EXO44StomperExosuit     EXO48Obsidian                 EXO51Lumberer            EmergencyBeacon
+;FLAM40Incinerator       HeavyAirstrike                HellfireIncendiaryBombs  HumblebeeUAVdrone
+;LAS98LaserCannon        LIFT850JumpPack               M25Rumbler               M5APC
+;M532HAV                 MC109HammerMotorcycle         ME1SnifferMetalDetector  MG94MachineGun
+;MLS4XCommando           MissileBarrage                NUX223Hellbomb           ObliteratorGrenadeLauncher
+;OrbitalLaserStrike      REC6Demolisher                REP80                    RL112RecoillessRifle
+;RailcannonStrike        Reinforce                     Resupply                 ResupplyPack
+;SH20ShieldGenerator     SH32DirectionalKineticShield  ShredderMissileStrike    SledgePrecisionArtillery
+;StaticFieldConductors   StrafingRun                   TD110Bastion             TOX13Avenger
+;TripleThundererBarrage  VindicatorBunkerBusterBomb
 
-;x::AMGIIMinigunTurret()
-;x::ARX34RailcannonTurret()
-;x::AC22DumDum()
-;x::AD289Angel() 
-;x::AD334GuardDog()
-;x::AT47AntiTankEmplacement()
-;x::AirdroppedAntiTankMines()
-;x::AirdroppedStunMines()
-;x::AntiPersonnelBarrier()
-;x::CloseAirSupport()
-;x::DistractorBeacon()
-;x::EAT17()
-;x::EXO44StomperExosuit()
-;x::EXO48Obsidian()
-;x::EXO51Lumberer()
-;x::EmergencyBeacon()
-;x::FLAM40Incinerator()
-;x::HeavyAirstrike()
-;x::HellfireIncendiaryBombs()
-;x::HumblebeeUAVdrone()
-;x::LAS98LaserCannon()
-;x::LIFT850JumpPack()
-;x::M25Rumbler()
-;x::M5APC()
-;x::M532HAV()
-;x::MC109HammerMotorcycle()
-;x::ME1SnifferMetalDetector()
-;x::MG94MachineGun()
-;x::MLS4XCommando()
-;x::MissileBarrage()
-;x::NUX223Hellbomb()
-;x::ObliteratorGrenadeLauncher()
-;x::OrbitalLaserStrike()
-;x::REC6Demolisher()
-;x::REP80()
-;x::RL112RecoillessRifle()
-;x::RailcannonStrike()
-;x::Reinforce()
-;x::Resupply()
-;x::ResupplyPack()
-;x::SH20ShieldGenerator()
-;x::SH32DirectionalKineticShield()
-;x::ShredderMissileStrike()
-;x::SledgePrecisionArtillery()
-;x::StaticFieldConductors()
-;x::StrafingRun()
-;x::TD110Bastion()
-;x::TOX13Avenger()
-;x::TripleThundererBarrage()
-;x::VindicatorBunkerBusterBomb()
 
-;     This is where the actual codes will be
-; --- No edits are necessary below this line ---
+; -----------------------------------------------------------------------------
+; This is where you declare which keys to map to strategems
+; The syntax is: <key>::DoStrategem(<strategem>)
+; Some examples: 
+; numpad1::DoStrategem(AMGIIMinigunTurret)
+; numpad3::DoStrategem(Resupply)
+; numpad5::DoStrategem(Reinforce)
+; numpad7::DoStrategem(AD334GuardDog)
+; numpad9::DoStrategem(AMGIIMinigunTurret)
+; -----------------------------------------------------------------------------
 
-AMGIIMinigunTurret() {
+numpad1::DoStrategem(AMGIIMinigunTurret)
+numpad3::DoStrategem(Resupply)
+numpad5::DoStrategem(Reinforce)
+numpad7::DoStrategem(AD334GuardDog)
+numpad9::DoStrategem(AMGIIMinigunTurret)
+
+; -----------------------------------------------------------------------------
+; The bottom of this file is where the function to perform the key presses,
+;  and the predefined sequences named by the strategem they encode.
+; --- No user edits are necessary below this line ---
+; -----------------------------------------------------------------------------
+
+; Pass array of key presses the correspond to the strategem
+; This function wraps them with control presses and adds 
+DoStrategem(CommandArray){
+
 	BlockInput On
 	Send {LControl down}
-	Sleep 50
-	Send a
-	Sleep 50
-	Send s 
-	Sleep 50
-	Send w
-	Sleep 50
-	Send d
-	Sleep 50
-	Send a
+  for index, element in CommandArray
+  {
+    Sleep 50
+    Send element
+  }
 	Sleep 50
 	Send {LControl up}
 	BlockInput Off
 	return
 }
 
-ARX34RailcannonTurret() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send a
-	Sleep 50
-	Send s 
-	Sleep 50
-	Send w
-	Sleep 50
-	Send a
-	Sleep 50
-	Send d
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-AC22DumDum() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send a 
-	Sleep 50
-	Send s
-	Sleep 50
-	Send w
-	Sleep 50
-	Send w
-	Sleep 50
-	Send d
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-AD289Angel() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send w 
-	Sleep 50
-	Send a
-	Sleep 50
-	Send a
-	Sleep 50
-	Send d
-	Sleep 50
-	Send s
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-AD334GuardDog() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send w 
-	Sleep 50
-	Send a
-	Sleep 50
-	Send w
-	Sleep 50
-	Send d
-	Sleep 50
-	Send s
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-AT47AntiTankEmplacement() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send a
-	Sleep 50
-	Send a 
-	Sleep 50
-	Send w
-	Sleep 50
-	Send w
-	Sleep 50
-	Send d
-	Sleep 50
-	Send a
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-AirdroppedAntiTankMines() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send a
-	Sleep 50
-	Send d 
-	Sleep 50
-	Send s
-	Sleep 50
-	Send w
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-AirdroppedStunMines() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send a
-	Sleep 50
-	Send d 
-	Sleep 50
-	Send w
-	Sleep 50
-	Send s
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-AntiPersonnelBarrier() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send a
-	Sleep 50
-	Send d 
-	Sleep 50
-	Send s
-	Sleep 50
-	Send s
-	Sleep 50
-	Send d
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-CloseAirSupport() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send d
-	Sleep 50
-	Send d 
-	Sleep 50
-	Send s
-	Sleep 50
-	Send a
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-DistractorBeacon() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send a
-	Sleep 50
-	Send s 
-	Sleep 50
-	Send d
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-EAT17() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send a
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send s
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-EXO44StomperExosuit() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send d 
-	Sleep 50
-	Send w
-	Sleep 50
-	Send a
-	Sleep 50
-	Send s
-	Sleep 50
-	Send s
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-EXO48Obsidian() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send d 
-	Sleep 50
-	Send w
-	Sleep 50
-	Send a
-	Sleep 50
-	Send s
-	Sleep 50
-	Send a
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-EXO51Lumberer() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send d 
-	Sleep 50
-	Send w
-	Sleep 50
-	Send a
-	Sleep 50
-	Send s
-	Sleep 50
-	Send d
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-EmergencyBeacon() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send w
-	Sleep 50
-	Send s
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-FLAM40Incinerator() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send a 
-	Sleep 50
-	Send s
-	Sleep 50
-	Send d
-	Sleep 50
-	Send a
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-HeavyAirstrike() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send d
-	Sleep 50
-	Send w 
-	Sleep 50
-	Send s
-	Sleep 50
-	Send d
-	Sleep 50
-	Send a
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-HellfireIncendiaryBombs() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send d
-	Sleep 50
-	Send w 
-	Sleep 50
-	Send a
-	Sleep 50
-	Send d
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-HumblebeeUAVdrone() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send a
-	Sleep 50
-	Send w 
-	Sleep 50
-	Send d
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-LAS98LaserCannon() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send a 
-	Sleep 50
-	Send s
-	Sleep 50
-	Send w
-	Sleep 50
-	Send a
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-LIFT850JumpPack() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send w
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send w
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-M25Rumbler() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send a
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send a
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-M5APC() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send d
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send a
-	Sleep 50
-	Send d
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-M532HAV() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send d
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send w
-	Sleep 50
-	Send s
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-MC109HammerMotorcycle() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send d
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send a
-	Sleep 50
-	Send w
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-ME1SnifferMetalDetector() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send s
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-MG94MachineGun() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send a
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send d
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-MLS4XCommando() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send a
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send d
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-MissileBarrage() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send d
-	Sleep 50
-	Send s
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send a
-	Sleep 50
-	Send s
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-NUX223Hellbomb() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send w
-	Sleep 50
-	Send a
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send w
-	Sleep 50
-	Send s
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-ObliteratorGrenadeLauncher() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send a
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-OrbitalLaserStrike() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send d
-	Sleep 50
-	Send w
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-REC6Demolisher() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send a
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-REP80() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send s
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-RL112RecoillessRifle() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send a
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-RailcannonStrike() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send d
-	Sleep 50
-	Send s
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-Reinforce() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send w
-	Sleep 50
-	Send s
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-Resupply() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send s
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-ResupplyPack() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send w
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-SH20ShieldGenerator() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send w
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-SH32DirectionalKineticShield() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send w
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-ShredderMissileStrike() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send d
-	Sleep 50
-	Send a
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-SledgePrecisionArtillery() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send d
-	Sleep 50
-	Send a
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-StaticFieldConductors() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send d
-	Sleep 50
-	Send w 
-	Sleep 50
-	Send a
-	Sleep 50
-	Send s
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-StrafingRun() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send d
-	Sleep 50
-	Send d 
-	Sleep 50
-	Send w
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-TD110Bastion() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send d
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-TOX13Avenger() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send s
-	Sleep 50
-	Send a
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send d
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-TripleThundererBarrage() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send d
-	Sleep 50
-	Send s
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send w
-	Sleep 50 
-	Send a
-	Sleep 50 
-	Send s
-	Sleep 50 
-	Send {LControl up}
-	BlockInput Off
-	return
-}
-
-VindicatorBunkerBusterBomb() {
-	BlockInput On
-	Send {LControl down}
-	Sleep 50
-	Send d
-	Sleep 50
-	Send d 
-	Sleep 50
-	Send d
-	Sleep 50
-	Send {LControl up}
-	BlockInput Off
-	return
-}
+; Arrays of key sequences for each strategem 
+AMGIIMinigunTurret            :=  Array("a","s","w","d","a")
+ARX34RailcannonTurret         :=  Array("a","s","w","a","d")
+AC22DumDum                    :=  Array("s","a","s","w","w","d")
+AD289Angel                    :=  Array("s","w","a","a","d","s")
+AD334GuardDog                 :=  Array("s","w","a","w","d","s")
+AT47AntiTankEmplacement       :=  Array("a","a","w","w","d","a")
+AirdroppedAntiTankMines       :=  Array("a","d","s","w")
+AirdroppedStunMines           :=  Array("a","d","w","s")
+AntiPersonnelBarrier          :=  Array("a","d","s","s","d")
+CloseAirSupport               :=  Array("d","d","s","a")
+DistractorBeacon              :=  Array("a","s","d")
+EAT17                         :=  Array("s","a","d","w","s")
+EXO44StomperExosuit           :=  Array("s","d","w","a","s","s")
+EXO48Obsidian                 :=  Array("s","d","w","a","s","a")
+EXO51Lumberer                 :=  Array("s","d","w","a","s","d")
+EmergencyBeacon               :=  Array("w","s","d","w")
+FLAM40Incinerator             :=  Array("s","a","s","d","a")
+HeavyAirstrike                :=  Array("d","w","s","d","a")
+HellfireIncendiaryBombs       :=  Array("d","w","a","d")
+HumblebeeUAVdrone             :=  Array("a","w","d")
+LAS98LaserCannon              :=  Array("s","a","s","w","a")
+LIFT850JumpPack               :=  Array("s","w","w","s","w")
+M25Rumbler                    :=  Array("s","a","w","a","a")
+M5APC                         :=  Array("s","d","s","a","a","d")
+M532HAV                       :=  Array("s","d","w","a","w","s")
+MC109HammerMotorcycle         :=  Array("s","d","s","a","a","w")
+ME1SnifferMetalDetector       :=  Array("s","s","d","w")
+MG94MachineGun                :=  Array("s","a","s","w","d")
+MLS4XCommando                 :=  Array("s","a","w","s","d")
+MissileBarrage                :=  Array("d","s","s","s","a","s")
+NUX223Hellbomb                :=  Array("w","a","d","s","w","s")
+ObliteratorGrenadeLauncher    :=  Array("s","a","w","a","s")
+OrbitalLaserStrike            :=  Array("d","w","a","w","d","a")
+REC6Demolisher                :=  Array("s","a","d","w","w")
+REP80                         :=  Array("s","s","a","d","s")
+RL112RecoillessRifle          :=  Array("s","a","d","d","a")
+RailcannonStrike              :=  Array("d","s","w","s","a")
+Reinforce                     :=  Array("w","s","d","a","w")
+Resupply                      :=  Array("s","s","w","d")
+ResupplyPack                  :=  Array("s","w","s","s","d")
+SH20ShieldGenerator           :=  Array("s","w","a","d","a","d")
+SH32DirectionalKineticShield  :=  Array("s","w","a","d","a","s")
+ShredderMissileStrike         :=  Array("d","a","d","a","s","s","d")
+SledgePrecisionArtillery      :=  Array("d","a","d","a","s","s","d")
+StaticFieldConductors         :=  Array("d","w","a","s")
+StrafingRun                   :=  Array("d","d","w")
+TD110Bastion                  :=  Array("s","d","s","a","a","w")
+TOX13Avenger                  :=  Array("s","a","s","d","d")
+TripleThundererBarrage        :=  Array("d","s","w","w","a","s")
+VindicatorBunkerBusterBomb    :=  Array("d","d","d")
